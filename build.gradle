@@ -128,6 +128,21 @@ configure(allProjs) {
         testRuntime "org.pegdown:pegdown:$pegdownVersion"
         // Your other deps here
     }
+    sourceSets {
+        main {
+            java {
+                srcDir 'build/generated-main-avro-java'
+            }
+        }
+        scoverage {
+            runtimeClasspath += sourceSets.main.output
+            compileClasspath += sourceSets.main.output
+        }
+        testScoverage {
+            runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+            compileClasspath += sourceSets.main.output + sourceSets.test.output
+        }
+    }
 
 }
 
